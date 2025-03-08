@@ -1,5 +1,6 @@
+// Update src/store/useResumeStore.ts
 import { create } from 'zustand';
-import { ResumeState, PersonalInfo, Education, Experience, Skill, TemplateType } from '../types/resume';
+import { ResumeState, PersonalInfo, Education, Experience, Skill, Project, Certification, TemplateType } from '../types/resume';
 
 const initialState = {
   personalInfo: {
@@ -13,6 +14,8 @@ const initialState = {
   education: [],
   experience: [],
   skills: [],
+  projects: [],
+  certifications: [],
   selectedTemplate: 'modern' as TemplateType,
 };
 
@@ -22,5 +25,7 @@ export const useResumeStore = create<ResumeState>((set) => ({
   setEducation: (education: Education[]) => set({ education }),
   setExperience: (experience: Experience[]) => set({ experience }),
   setSkills: (skills: Skill[]) => set({ skills }),
+  setProjects: (projects: Project[]) => set({ projects }),
+  setCertifications: (certifications: Certification[]) => set({ certifications }),
   setTemplate: (template: TemplateType) => set({ selectedTemplate: template }),
 }));
