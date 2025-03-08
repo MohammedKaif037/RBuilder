@@ -64,12 +64,7 @@ export const ModernTemplate: React.FC<ResumeData> = ({
             <div key={project.id} className="mb-4">
               <div className="flex justify-between">
                 <h3 className="font-semibold">{project.name}</h3>
-                {project.url && (
-                  <a href={project.url} className="text-blue-600 flex items-center gap-1" target="_blank" rel="noopener noreferrer">
-                    <Globe size={14} />
-                    Link
-                  </a>
-                )}
+                 
               </div>
               <div className="text-gray-500 text-sm">
                 {project.startDate} - {project.endDate}
