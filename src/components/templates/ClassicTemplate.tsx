@@ -1,3 +1,4 @@
+// Update src/components/templates/ClassicTemplate.tsx
 import React from 'react';
 import { ResumeData } from '../../types/resume';
 
@@ -6,6 +7,8 @@ export const ClassicTemplate: React.FC<ResumeData> = ({
   education,
   experience,
   skills,
+  projects,
+  certifications,
 }) => {
   return (
     <div className="font-serif max-w-4xl mx-auto">
@@ -41,6 +44,31 @@ export const ClassicTemplate: React.FC<ResumeData> = ({
         ))}
       </section>
 
+      {projects.length > 0 && (
+        <section className="mb-6">
+          <h2 className="text-2xl font-bold mb-4">Projects</h2>
+          {projects.map((project) => (
+            <div key={project.id} className="mb-4">
+              <div className="flex justify-between items-baseline">
+                <h3 className="text-xl font-semibold">{project.name}</h3>
+                <span className="text-gray-600">{project.startDate} - {project.endDate}</span>
+              </div>
+              <p className="text-lg text-gray-700">
+                {project.technologies.join(' • ')}
+                {project.url && (
+                  <span> • <a href={project.url} className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">View Project</a></span>
+                )}
+              </p>
+              <ul className="list-disc ml-5 mt-2">
+                {project.description.map((desc, index) => (
+                  <li key={index} className="text-gray-700 my-1">{desc}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+      )}
+
       <section className="mb-6">
         <h2 className="text-2xl font-bold mb-4">Education</h2>
         {education.map((edu) => (
@@ -54,6 +82,26 @@ export const ClassicTemplate: React.FC<ResumeData> = ({
           </div>
         ))}
       </section>
+
+      {certifications.length > 0 && (
+        <section className="mb-6">
+          <h2 className="text-2xl font-bold mb-4">Certifications</h2>
+          {certifications.map((cert) => (
+            <div key={cert.id} className="mb-4">
+              <div className="flex justify-between items-baseline">
+                <h3 className="text-xl font-semibold">{cert.name}</h3>
+                <span className="text-gray-600">{cert.date}</span>
+              </div>
+              <p className="text-lg text-gray-700">{cert.issuer}</p>
+              {cert.url && (
+                <p className="text-blue-600 underline">
+                  <a href={cert.url} target="_blank" rel="noopener noreferrer">Verify Certificate</a>
+                </p>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
 
       <section>
         <h2 className="text-2xl font-bold mb-4">Skills</h2>
