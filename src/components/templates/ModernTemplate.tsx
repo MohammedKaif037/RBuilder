@@ -129,7 +129,7 @@ export const ModernTemplate: React.FC<ResumeData> = ({
           {skills.map((skill) => (
             <span
               key={skill.id}
-              className="bg-gray-200 px-3 py-1 rounded-full text-gray-700"
+              className="text-gray-700 mr-2"
             >
               {skill.name}
             </span>
