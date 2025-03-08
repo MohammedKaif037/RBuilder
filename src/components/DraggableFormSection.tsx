@@ -1,3 +1,4 @@
+// Update src/components/DraggableFormSection.tsx
 import React from 'react';
 import {
   DndContext,
@@ -18,6 +19,8 @@ import { EducationForm } from './EducationForm';
 import { ExperienceForm } from './ExperienceForm';
 import { SkillsForm } from './SkillsForm';
 import { PersonalInfoForm } from './PersonalInfoForm';
+import { ProjectsForm } from './ProjectsForm';
+import { CertificationsForm } from './CertificationsForm';
 
 export const DraggableFormSection: React.FC = () => {
   const sensors = useSensors(
@@ -31,6 +34,8 @@ export const DraggableFormSection: React.FC = () => {
     { id: 'personal-info', component: PersonalInfoForm },
     { id: 'experience', component: ExperienceForm },
     { id: 'education', component: EducationForm },
+    { id: 'projects', component: ProjectsForm },
+    { id: 'certifications', component: CertificationsForm },
     { id: 'skills', component: SkillsForm },
   ];
 
