@@ -107,12 +107,6 @@ export const ModernTemplate: React.FC<ResumeData> = ({
             <div key={cert.id} className="mb-4">
               <div className="flex justify-between">
                 <h3 className="font-semibold">{cert.name}</h3>
-                {cert.url && (
-                  <a href={cert.url} className="text-blue-600 flex items-center gap-1" target="_blank" rel="noopener noreferrer">
-                    <Globe size={14} />
-                    Verify
-                  </a>
-                )}
               </div>
               <div className="text-gray-600">{cert.issuer}</div>
               <div className="text-gray-500 text-sm">
