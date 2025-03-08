@@ -47,9 +47,7 @@ export const ResumePreview: React.FC = () => {
       imgHeight
     );
 
-    // Add footer with proper spacing
-    pdf.setFontSize(10);
-    pdf.text('Page 1', 10, pageHeight - 10);
+     
 
     pdf.save(`Resume-${resumeData.selectedTemplate}.pdf`);
   };
