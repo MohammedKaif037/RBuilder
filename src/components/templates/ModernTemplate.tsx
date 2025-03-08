@@ -1,12 +1,15 @@
+// Update src/components/templates/ModernTemplate.tsx
 import React from 'react';
 import { ResumeData } from '../../types/resume';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, Globe } from 'lucide-react';
 
 export const ModernTemplate: React.FC<ResumeData> = ({
   personalInfo,
   education,
   experience,
   skills,
+  projects,
+  certifications,
 }) => {
   return (
     <div className="font-sans">
@@ -54,6 +57,36 @@ export const ModernTemplate: React.FC<ResumeData> = ({
         ))}
       </section>
 
+      {projects.length > 0 && (
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold border-b-2 border-gray-300 pb-2 mb-3">Projects</h2>
+          {projects.map((project) => (
+            <div key={project.id} className="mb-4">
+              <div className="flex justify-between">
+                <h3 className="font-semibold">{project.name}</h3>
+                {project.url && (
+                  <a href={project.url} className="text-blue-600 flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                    <Globe size={14} />
+                    Link
+                  </a>
+                )}
+              </div>
+              <div className="text-gray-500 text-sm">
+                {project.startDate} - {project.endDate}
+              </div>
+              <div className="text-gray-600 text-sm mt-1">
+                {project.technologies.join(', ')}
+              </div>
+              <ul className="list-disc list-inside mt-2">
+                {project.description.map((desc, index) => (
+                  <li key={index} className="text-gray-700">{desc}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+      )}
+
       <section className="mb-6">
         <h2 className="text-xl font-semibold border-b-2 border-gray-300 pb-2 mb-3">Education</h2>
         {education.map((edu) => (
@@ -66,6 +99,29 @@ export const ModernTemplate: React.FC<ResumeData> = ({
           </div>
         ))}
       </section>
+
+      {certifications.length > 0 && (
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold border-b-2 border-gray-300 pb-2 mb-3">Certifications</h2>
+          {certifications.map((cert) => (
+            <div key={cert.id} className="mb-4">
+              <div className="flex justify-between">
+                <h3 className="font-semibold">{cert.name}</h3>
+                {cert.url && (
+                  <a href={cert.url} className="text-blue-600 flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                    <Globe size={14} />
+                    Verify
+                  </a>
+                )}
+              </div>
+              <div className="text-gray-600">{cert.issuer}</div>
+              <div className="text-gray-500 text-sm">
+                {cert.date}{cert.expirationDate ? ` - ${cert.expirationDate}` : ''}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
 
       <section>
         <h2 className="text-xl font-semibold border-b-2 border-gray-300 pb-2 mb-3">Skills</h2>
