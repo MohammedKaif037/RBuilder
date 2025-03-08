@@ -93,11 +93,6 @@ export const ClassicTemplate: React.FC<ResumeData> = ({
                 <span className="text-gray-600">{cert.date}</span>
               </div>
               <p className="text-lg text-gray-700">{cert.issuer}</p>
-              {cert.url && (
-                <p className="text-blue-600 underline">
-                  <a href={cert.url} target="_blank" rel="noopener noreferrer">Verify Certificate</a>
-                </p>
-              )}
             </div>
           ))}
         </section>
@@ -109,7 +104,7 @@ export const ClassicTemplate: React.FC<ResumeData> = ({
           {skills.map((skill) => (
             <span
               key={skill.id}
-              className="px-3 py-1 bg-gray-100 text-gray-800 rounded border border-gray-300"
+              className="text-gray-700 mr-2"
             >
               {skill.name}
             </span>
