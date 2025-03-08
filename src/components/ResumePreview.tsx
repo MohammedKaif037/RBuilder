@@ -22,22 +22,43 @@ export const ResumePreview: React.FC = () => {
   const handleDownload = async () => {
     if (!resumeRef.current) return;
 
-    const canvas = await html2canvas(resumeRef.current, { scale: 2 });
-    const imgData = canvas.toDataURL('image/png');
+    const canvas = await html2canvas(resumeRef.current, { 
+      scale: 1.5,  // Reduced from 2 to 1.5 for better size/quality balance
+      useCORS: true,
+      allowTaint: false,
+      logging: false,
+    });
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.9); // Use JPEG with compression
 
     const pdf = new jsPDF('p', 'mm', 'a4');
-    const imgWidth = 210;
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = pageWidth - 20; // 10mm margins on each side
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-    pdf.save('Resume.pdf');
+    // Add content with proper margins
+    pdf.addImage(
+      imgData, 
+      'JPEG', 
+      10,  // Left margin
+      10,  // Top margin
+      imgWidth, 
+      imgHeight
+    );
+
+    // Add footer with proper spacing
+    pdf.setFontSize(10);
+    pdf.text('Page 1', 10, pageHeight - 10);
+
+    pdf.save(`Resume-${resumeData.selectedTemplate}.pdf`);
   };
 
   return (
     <div className="space-y-6">
       <TemplateSelector />
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-[800px] mx-auto">
-        <div ref={resumeRef}>
+        <div ref={resumeRef} style={{ width: '190mm' }}> {/* Match A4 width */}
           <SelectedTemplate {...resumeData} />
         </div>
       </div>
